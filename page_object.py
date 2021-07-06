@@ -36,4 +36,7 @@ class Page:
 	def visit_website(self):
 		return self.__driver.get(self.__URL)
 
+	def visit(self, page_url):
+		return self.__driver.get(page_url)
+
 

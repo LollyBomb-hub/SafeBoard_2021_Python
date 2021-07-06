@@ -142,9 +142,28 @@ class CTestBooks(unittest.TestCase):
 		self.__form.visit_website()
 		list_of_books = self.__form.find_elements(LOCATOR_BOOK)
 		for book_element_index in range(len(list_of_books)):
-			print(parse_book(self.__form, book_element_index + 1))
+			book = parse_book(self.__form, book_element_index + 1)
+			for key in book.keys():
+				flag = check_book_data(key, book[key])
+#				if not flag:
+#					print(f"\nNo {key} for book #{book_element_index}")
+				assert flag
+
+
+class DTestCart(unittest.TestCase):
+
+	def setUp(self):
+		self.__form = CartPage(DRIVER, "http://localhost:8080/cart")
+		self.__form.login("http://localhost:8080/login", RIGHT_LOGIN)
+		self.__form.set_books_page("http://localhost:8080/books")
+
+	def test1(self):
+		#ToDo
+		pass
 
 
 if __name__ == "__main__":
 
 	unittest.main(warnings="ignore")
+
+
